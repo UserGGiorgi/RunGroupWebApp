@@ -1,0 +1,49 @@
+﻿@using RunGroupWebApp.ViewModels
+@model List<UserViewModel>
+
+<section class="flush-with-above">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover align-items-center table-borderless">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="bg-white">
+                                <th scope="row">
+                                    <img class="card-img-top" src="@item.ProfileImageUrl" width="100%" height="225" alt="Card image cap"></img>
+                                    <div class="media align-items-center">
+                                        @* <img alt="Image profile avatar" src="@user.ProfileImageUrl" class="avatar"> *@
+                                        <div class="media-body">
+                                            <span class="h6 mb-0">@item.UserName</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td>
+                                    <a class="btn btn-outline-primary" asp-controller="User" asp-action="Detail" asp-route-id="@item.Id">
+                                        View Profile
+                                    </a>
+                                </td>
+
+                                @if(User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                {
+                                    var mileage = item.Mileage == null ? "?" : item.Mileage.ToString();
+                                    var pace = item.Pace == null ? "?" : item.Mileage.ToString();
+                                }
+                                
+                              @*   <td><i class="icon-location"></i> @user.Location</td> *@
+                            </tr>
+                            <tr class="table-divider">
+                                <th></th>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!--end of col-->
+        </div>
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>
